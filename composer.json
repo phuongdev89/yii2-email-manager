@@ -1,5 +1,5 @@
 {
-  "name": "yarcode/yii2-email-manager",
+  "name": "navatech/yii2-email-manager",
   "description": "Yii2 Email Manager",
   "license": "MIT",
   "keywords": [
@@ -40,7 +40,7 @@
   },
   "autoload": {
     "psr-4": {
-      "yarcode\\email\\": "./src"
+      "navatech\\email\\": "./src"
     }
   }
 }
