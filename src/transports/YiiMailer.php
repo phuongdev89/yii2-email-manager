@@ -4,9 +4,9 @@
  * @author Valentin Konusov <rlng-krsk@yandex.ru>
  */
 
-namespace yarcode\email\transports;
+namespace navatech\email\transports;
 
-use yarcode\email\interfaces\TransportInterface;
+use navatech\email\interfaces\TransportInterface;
 use yii\base\Component;
 use yii\mail\MailerInterface;
 

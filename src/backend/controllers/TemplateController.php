@@ -1,6 +1,6 @@
 <?php
 
-namespace yarcode\email\backend\controllers;
+namespace navatech\email\backend\controllers;
 
 use Yii;
 use yii\data\ActiveDataProvider;

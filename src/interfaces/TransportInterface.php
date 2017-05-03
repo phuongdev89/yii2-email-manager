@@ -4,7 +4,7 @@
  * @author Valentin Konusov <rlng-krsk@yandex.ru>
  */
 
-namespace yarcode\email\interfaces;
+namespace navatech\email\interfaces;
 
 interface TransportInterface
 {

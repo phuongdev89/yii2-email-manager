@@ -1,9 +1,9 @@
 <?php
 
-namespace yarcode\email\models;
+namespace navatech\email\models;
 
-use yarcode\email\EmailManager;
-use yarcode\email\twig\EmailTemplateLoader;
+use navatech\email\EmailManager;
+use navatech\email\twig\EmailTemplateLoader;
 use yii\db\ActiveRecord;
 use yii\helpers\VarDumper;
 

@@ -4,10 +4,10 @@
  * @author Valentin Konusov <rlng-krsk@yandex.ru>
  */
 
-namespace yarcode\email\twig;
+namespace navatech\email\twig;
 
-use yarcode\email\EmailManager;
-use yarcode\email\models\EmailTemplate;
+use navatech\email\EmailManager;
+use navatech\email\models\EmailTemplate;
 use yii\base\Component;
 use yii\helpers\ArrayHelper;
 

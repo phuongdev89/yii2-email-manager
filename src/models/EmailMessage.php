@@ -1,6 +1,6 @@
 <?php
 
-namespace yarcode\email\models;
+namespace navatech\email\models;
 
 use baibaratsky\yii\behaviors\model\SerializedAttributes;
 use yii\behaviors\TimestampBehavior;

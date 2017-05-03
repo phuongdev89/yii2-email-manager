@@ -1,12 +1,12 @@
 <?php
 
-namespace yarcode\email\commands;
+namespace navatech\email\commands;
 
 use React\EventLoop\Factory;
 use yii\console\Controller;
 use yii\db\Expression;
-use yarcode\email\EmailManager;
-use yarcode\email\models\EmailMessage;
+use navatech\email\EmailManager;
+use navatech\email\models\EmailMessage;
 
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>

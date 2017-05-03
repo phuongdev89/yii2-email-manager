@@ -7,13 +7,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist yarcode/yii2-email-manager "~0.2.*"
+php composer.phar require --prefer-dist navatech/yii2-email-manager "~0.2.*"
 ```
 
 or add
 
 ```
-"yarcode/yii2-email-manager": "~0.2.*"
+"navatech/yii2-email-manager": "~0.2.*"
 ```
 
 to the require section of your `composer.json` file.
@@ -23,7 +23,7 @@ to the require section of your `composer.json` file.
 Migration run
 
 ```php
-php yii migrate --migrationPath=@vendor/yarcode/yii2-email-manager/src/migrations
+php yii migrate --migrationPath=@vendor/navatech/yii2-email-manager/src/migrations
 ```
 
 ## Configuration ##
@@ -32,9 +32,9 @@ Simple configuration:
 
     'components' => [
         'emailManager' => [
-            'class' => '\yarcode\email\EmailManager',
+            'class' => '\navatech\email\EmailManager',
             'transports' => [
-                'yiiMailer' => '\yarcode\email\transports\YiiMailer'
+                'yiiMailer' => '\navatech\email\transports\YiiMailer'
             ],
         ],
     ]
@@ -43,14 +43,14 @@ Multi transport configuration:
 
     'components' => [
         'emailManager' => [
-            'class' => '\yarcode\email\EmailManager',
+            'class' => '\navatech\email\EmailManager',
             'defaultTransport' => 'yiiMailer',
             'transports' => [
                 'yiiMailer' => [
-                    'class' => '\yarcode\email\transports\YiiMailer',
+                    'class' => '\navatech\email\transports\YiiMailer',
                 ],
                 'mailGun' => [
-                    'class' => '\yarcode\email\transports\MailGun',
+                    'class' => '\navatech\email\transports\MailGun',
                     'apiKey' => 'xxx',
                     'domain' => 'our-domain.net',
                 ],
@@ -61,7 +61,7 @@ Multi transport configuration:
 Add command to the list of the available commands. Put it into console app configuration:
 
     'controllerMap' => [
-        'email' => '\yarcode\email\commands\EmailCommand',
+        'email' => '\navatech\email\commands\EmailCommand',
     ],
 
 Add email sending daemon into crontab via lockrun or run-one utils:

@@ -5,7 +5,7 @@ use yii\widgets\DetailView;
 
 /**
  * @var yii\web\View $this
- * @var yarcode\email\models\EmailTemplate $model
+ * @var navatech\email\models\EmailTemplate $model
  */
 
 $this->title = $model->subject;

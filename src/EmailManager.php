@@ -4,12 +4,12 @@
  * @author Valentin Konusov <rlng-krsk@yandex.ru>
  */
 
-namespace yarcode\email;
+namespace navatech\email;
 
 use yii\base\Component;
 use yii\base\InvalidConfigException;
-use yarcode\email\interfaces\TransportInterface;
-use yarcode\email\models\EmailMessage;
+use navatech\email\interfaces\TransportInterface;
+use navatech\email\models\EmailMessage;
 
 class EmailManager extends Component implements TransportInterface
 {

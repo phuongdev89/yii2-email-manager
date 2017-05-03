@@ -1,6 +1,6 @@
 <?php
 
-namespace yarcode\email\backend;
+namespace navatech\email\backend;
 
 use yii\base\Module as BaseModule;
 
@@ -9,7 +9,7 @@ use yii\base\Module as BaseModule;
  * @author Valentin Konusov <rlng-krsk@yandex.ru>
  *
  * Class Module
- * @package yarcode\email\backend
+ * @package navatech\email\backend
  */
 class Module extends BaseModule
 {
