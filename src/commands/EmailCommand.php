@@ -81,7 +81,7 @@ class EmailCommand extends Controller
 
         $transaction = $db->beginTransaction();
         try {
-            $id = $db->createCommand('SELECT id FROM {{%email_EmailMessage}} WHERE status=:status ORDER BY priority DESC, id ASC LIMIT 1 FOR UPDATE', [
+            $id = $db->createCommand('SELECT id FROM {{%email_message}} WHERE status=:status ORDER BY priority DESC, id ASC LIMIT 1 FOR UPDATE', [
                 'status' => EmailMessage::STATUS_NEW,
             ])->queryScalar();
 
