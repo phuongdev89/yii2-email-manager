@@ -1,19 +1,18 @@
-# Email Module #
+# Installation #
 
-## Installation ##
-
+## Composer ##
 The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
 
 Either run
 
 ```
-php composer.phar require --prefer-dist navatech/yii2-email-manager "@dev"
+php composer.phar require --prefer-dist navatech/yii2-email-manager "1.0.*"
 ```
 
 or add
 
 ```
-"navatech/yii2-email-manager": "@dev"
+"navatech/yii2-email-manager": "1.0.*"
 ```
 
 to the require section of your `composer.json` file.
@@ -26,22 +25,19 @@ Migration run
 php yii migrate --migrationPath=@vendor/navatech/yii2-email-manager/src/migrations
 ```
 
-## Configuration ##
+# Configuration #
 
-Simple configuration:
-
+## Simple configuration:
     'components' => [
-        'emailManager' => [
-            'class' => '\navatech\email\EmailManager',
-            'transports' => [
-                'yiiMailer' => '\navatech\email\transports\YiiMailer'
-            ],
+        'mailer'        => [
+            'class'            => 'yii\swiftmailer\Mailer',
+            'useFileTransport' => false,
+            'host'             => 'smtp.gmail.com',
+            'username'         => 'test@gmail.com',
+            'password'         => '12345678',
+            'port'             => '587',
+            'encryption'       => 'TLS',
         ],
-    ]
-
-Multi transport configuration:
-
-    'components' => [
         'emailManager' => [
             'class' => '\navatech\email\EmailManager',
             'defaultTransport' => 'yiiMailer',
@@ -49,11 +45,44 @@ Multi transport configuration:
                 'yiiMailer' => [
                     'class' => '\navatech\email\transports\YiiMailer',
                 ],
-                'mailGun' => [
-                    'class' => '\navatech\email\transports\MailGun',
+                /*
+                'mailGun' => [ //Not required
+                    'class'  => '\navatech\email\transports\MailGun',
                     'apiKey' => 'xxx',
                     'domain' => 'our-domain.net',
                 ],
+                */
+            ],
+        ],
+    ]
+
+## Advanced config
+First you need `navatech/yii2-setting` installed, create 5 records on Setting module:
+* `smtp_host` (value: `smtp.gmail.com`)
+* `smtp_user` (value: `test@gmail.com`)
+* `smtp_password` (value: `12345678`)
+* `smtp_port` (value: `587`)
+* `smtp_encryption` (value: `TLS`)
+
+
+    'components' => [
+        'mailer'        => [
+            'class'            => '\navatech\email\swiftmailer\Mailer',
+        ],
+        'emailManager'  => [
+            'class'            => '\navatech\email\components\EmailManager',
+            'defaultTransport' => 'yiiMailer',
+            'transports'       => [
+                'yiiMailer' => [
+                    'class' => '\navatech\email\transports\YiiMailer',
+                ],
+                /*
+                'mailGun' => [
+                    'class'  => '\navatech\email\transports\MailGun',
+                    'apiKey' => 'xxx',
+                    'domain' => 'our-domain.net',
+                ],
+                */
             ],
         ],
     ]
@@ -75,11 +104,11 @@ OR, if you will use cboden/ratchet
 ## Usage ##
 
     // obtain component instance
-    $emailManager = EmailManager::geInstance();
+    $emailManager = EmailManager::getInstance();
     // direct send via default transport
     $emailManager->send('from@example.com', 'to@example.com', 'test subject', 'test email');
     // queue send via default transport
-    $emailManager->send('from@example.com', 'to@example.com', 'test subject', 'test email');
+    $emailManager->queue('from@example.com', 'to@example.com', 'test subject', 'test email');
     // direct send via selected transport
     $emailManager->transports['mailGun']->send('from@example.com', 'to@example.com', 'test subject', 'test email');
     

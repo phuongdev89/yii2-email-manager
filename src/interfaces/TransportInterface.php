@@ -5,17 +5,17 @@
  */
 
 namespace navatech\email\interfaces;
+interface TransportInterface {
 
-interface TransportInterface
-{
-    /**
-     * @param $from
-     * @param $to
-     * @param $subject
-     * @param $text
-     * @param array $files
-     * @param null $bcc
-     * @return mixed
-     */
-    public function send($from, $to, $subject, $text, $files = [], $bcc = null);
+	/**
+	 * @param       $from
+	 * @param       $to
+	 * @param       $subject
+	 * @param       $text
+	 * @param array $files
+	 * @param null  $bcc
+	 *
+	 * @return mixed
+	 */
+	public function send($from, $to, $subject, $text, $files = [], $bcc = null);
 }

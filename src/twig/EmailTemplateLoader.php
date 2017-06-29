@@ -6,44 +6,38 @@
 
 namespace navatech\email\twig;
 
-use navatech\email\EmailManager;
+use navatech\email\components\EmailManager;
 use navatech\email\models\EmailTemplate;
+use Twig_LoaderInterface;
 use yii\base\Component;
 use yii\helpers\ArrayHelper;
 
-class EmailTemplateLoader extends Component implements \Twig_LoaderInterface
-{
-    /** @var string Attribute name to fetch template from */
-    public $attributeName = 'text';
+class EmailTemplateLoader extends Component implements Twig_LoaderInterface {
 
-    public function getSource($name)
-    {
-        $currentLanguage = \Yii::$app->language;
-        $defaultLanguage = ArrayHelper::getValue(EmailManager::getInstance()->languages, 0, 'en-US');
+	/** @var string Attribute name to fetch template from */
+	public $attributeName = 'text';
 
-        /** @var EmailTemplate $model */
-        $model = EmailTemplate::find()->where(['shortcut' => $name])
-            ->andWhere('language = :currentLanguage OR language = :defaultLanguage OR language = :systemDefaultLanguage', [
-                ':currentLanguage' => $currentLanguage,
-                ':defaultLanguage' => $defaultLanguage,
-                ':systemDefaultLanguage' => 'en-US',
-            ])->one();
+	public function getSource($name) {
+		$currentLanguage = \Yii::$app->language;
+		$defaultLanguage = ArrayHelper::getValue(EmailManager::getInstance()->languages, 0, 'en-US');
+		/** @var EmailTemplate $model */
+		$model = EmailTemplate::find()->where(['shortcut' => $name])->andWhere('language = :currentLanguage OR language = :defaultLanguage OR language = :systemDefaultLanguage', [
+				':currentLanguage'       => $currentLanguage,
+				':defaultLanguage'       => $defaultLanguage,
+				':systemDefaultLanguage' => 'en-US',
+			])->one();
+		if (!$model) {
+			\Yii::error("Missing template {$name}, current language {$currentLanguage}, default language {$defaultLanguage}", 'email');
+			return "!!! UNKNOWN TEMPLATE {$name} !!!";
+		}
+		return $model->getAttribute($this->attributeName);
+	}
 
-        if (!$model) {
-            \Yii::error("Missing template {$name}, current language {$currentLanguage}, default language {$defaultLanguage}", 'email');
-            return "!!! UNKNOWN TEMPLATE {$name} !!!";
-        }
+	public function getCacheKey($name) {
+		return $name . $this->attributeName;
+	}
 
-        return $model->getAttribute($this->attributeName);
-    }
-
-    public function getCacheKey($name)
-    {
-        return $name . $this->attributeName;
-    }
-
-    public function isFresh($name, $time)
-    {
-        return false;
-    }
+	public function isFresh($name, $time) {
+		return false;
+	}
 }
