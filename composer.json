@@ -1,6 +1,7 @@
 {
 	"name" : "navatech/yii2-email-manager",
 	"description" : "Yii2 Email Manager",
+	"type" : "yii2-extension",
 	"license" : "MIT",
 	"keywords" : [
 		"yii2",
@@ -22,8 +23,18 @@
 			"email" : "alexey.samoylov@gmail.com",
 			"homepage" : "http://yiiblog.ru",
 			"role" : "Developer"
+		},
+		{
+			"name" : "Le Phuong",
+			"email" : "phuong17889@gmail.com",
+			"homepage" : "http://navatech.vn",
+			"role" : "Developer"
 		}
 	],
+	"homepage" : "https://navatech.vn",
+	"support" : {
+		"source" : "https://github.com/navatech/yii2-email-manager"
+	},
 	"minimum-stability" : "stable",
 	"require" : {
 		"php" : ">=5.4.0",
@@ -41,7 +52,7 @@
 	},
 	"autoload" : {
 		"psr-4" : {
-			"navatech\\email\\" : "./src"
+			"navatech\\email\\" : "src/"
 		}
 	},
 	"extra" : {
