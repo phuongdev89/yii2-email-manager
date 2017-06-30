@@ -2,13 +2,17 @@
 
 namespace navatech\email\models;
 
+use BadMethodCallException;
 use Exception;
 use navatech\email\components\EmailManager;
+use navatech\email\Module;
 use navatech\email\twig\EmailTemplateLoader;
+use navatech\language\models\Language;
 use Twig_Environment;
 use Twig_LoaderInterface;
 use Yii;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 use yii\helpers\VarDumper;
 
 /**
@@ -42,25 +46,39 @@ class EmailTemplate extends ActiveRecord {
 	 * @return self
 	 */
 	public static function findByShortcut($shortcut, $language = null) {
-		$manager      = EmailManager::getInstance();
-		$languageCode = $language;
-		foreach (
-			[
+		if ($language == null) {
+			$language = Yii::$app->language;
+		}
+		$template = static::findOne([
+			'shortcut' => $shortcut,
+			'language' => $language,
+		]);
+		if ($template === null) {
+			$manager      = EmailManager::getInstance();
+			$languageCode = $language;
+			$list         = [
 				$language,
 				$manager->defaultLanguage,
 				'en-US',
-			] as $l
-		) {
-			$template     = static::findOne([
-				'shortcut' => $shortcut,
-				'language' => $l,
-			]);
-			$languageCode = $l;
-			if ($template) {
-				return $template;
+				'en',
+			];
+			if (Module::hasMultiLanguage()) {
+				$list = ArrayHelper::map(Language::getLanguages(), 'code', 'code');
 			}
+			foreach ($list as $l) {
+				$template     = static::findOne([
+					'shortcut' => $shortcut,
+					'language' => $l,
+				]);
+				$languageCode = $l;
+				if ($template) {
+					return $template;
+				}
+			}
+		} else {
+			return $template;
 		}
-		throw new \BadMethodCallException('Template not found: ' . VarDumper::dumpAsString($shortcut) . ', language ' . $languageCode);
+		throw new BadMethodCallException('Template not found: ' . VarDumper::dumpAsString($shortcut) . ', language ' . $languageCode);
 	}
 
 	/**
