@@ -44,8 +44,8 @@
 		"yiisoft/yii2-twig" : "~2.0.3",
 		"php-http/guzzle6-adapter" : "~1.0",
 		"baibaratsky/yii2-serialized-attributes-behavior" : "~1.1",
-		"navatech/yii2-navatech-base" : "1.0.0.2",
-		"navatech/yii2-roxymce" : "2.0.0.1"
+		"navatech/yii2-navatech-base" : "^1.0",
+		"navatech/yii2-roxymce" : "^2.0"
 	},
 	"suggest" : {
 		"cboden/ratchet" : "to use loop instead of for-cycle in daemon"
