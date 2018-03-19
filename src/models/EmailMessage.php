@@ -55,7 +55,6 @@ class EmailMessage extends ActiveRecord {
 				'class'      => TimestampBehavior::className(),
 				'attributes' => [
 					static::EVENT_BEFORE_INSERT => ['created_at'],
-					static::EVENT_BEFORE_UPDATE => ['updated_at'],
 				],
 			],
 			'serializedAttributes' => [
