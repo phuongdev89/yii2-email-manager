@@ -6,7 +6,6 @@ use baibaratsky\yii\behaviors\model\SerializedAttributes;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
-use yii\db\Expression;
 
 /**
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
@@ -56,8 +55,8 @@ class EmailMessage extends ActiveRecord {
 				'class'      => TimestampBehavior::className(),
 				'attributes' => [
 					static::EVENT_BEFORE_INSERT => ['created_at'],
+					static::EVENT_BEFORE_UPDATE => ['updated_at'],
 				],
-				'value'      => new Expression('NOW()'),
 			],
 			'serializedAttributes' => [
 				'class'      => SerializedAttributes::className(),
