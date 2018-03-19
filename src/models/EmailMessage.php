@@ -21,8 +21,8 @@ use yii\db\Expression;
  * @property string  $to
  * @property string  $subject
  * @property string  $text
- * @property string  $createdAt
- * @property string  $sentAt
+ * @property string  $created_at
+ * @property string  $sent_at
  * @property string  $bcc
  * @property string  $files
  */
@@ -55,7 +55,7 @@ class EmailMessage extends ActiveRecord {
 			'timestamp'            => [
 				'class'      => TimestampBehavior::className(),
 				'attributes' => [
-					static::EVENT_BEFORE_INSERT => ['createdAt'],
+					static::EVENT_BEFORE_INSERT => ['created_at'],
 				],
 				'value'      => new Expression('NOW()'),
 			],
@@ -87,8 +87,8 @@ class EmailMessage extends ActiveRecord {
 			],
 			[
 				[
-					'createdAt',
-					'sentAt',
+					'created_at',
+					'sent_at',
 					'files',
 				],
 				'safe',
@@ -110,15 +110,15 @@ class EmailMessage extends ActiveRecord {
 	 */
 	public function attributeLabels() {
 		return [
-			'id'        => 'ID',
-			'status'    => Yii::t('email', 'Status'),
-			'priority'  => Yii::t('email', 'Priority'),
-			'from'      => Yii::t('email', 'From'),
-			'to'        => Yii::t('email', 'To'),
-			'subject'   => Yii::t('email', 'Subject'),
-			'text'      => Yii::t('email', 'Text'),
-			'createdAt' => Yii::t('email', 'Created At'),
-			'sentAt'    => Yii::t('email', 'Sent At'),
+			'id'         => 'ID',
+			'status'     => Yii::t('email', 'Status'),
+			'priority'   => Yii::t('email', 'Priority'),
+			'from'       => Yii::t('email', 'From'),
+			'to'         => Yii::t('email', 'To'),
+			'subject'    => Yii::t('email', 'Subject'),
+			'text'       => Yii::t('email', 'Text'),
+			'created_at' => Yii::t('email', 'Created At'),
+			'sent_at'    => Yii::t('email', 'Sent At'),
 		];
 	}
 }

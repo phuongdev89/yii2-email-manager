@@ -79,13 +79,13 @@ class EmailController extends Controller {
 		try {
 			$result = EmailManager::getInstance()->send($model->from, $model->to, $model->subject, $model->text, $model->files, $model->bcc);
 			if ($result) {
-				$model->sentAt = new Expression('NOW()');
+				$model->sent_at = new Expression('NOW()');
 				$model->status = EmailMessage::STATUS_SENT;
 			} else {
 				$model->status = EmailMessage::STATUS_ERROR;
 			}
 			$model->updateAttributes([
-				'sentAt',
+				'sent_at',
 				'status',
 			]);
 			$transaction->commit();
