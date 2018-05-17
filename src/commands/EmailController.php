@@ -6,7 +6,6 @@ use navatech\email\components\EmailManager;
 use navatech\email\models\EmailMessage;
 use React\EventLoop\Factory;
 use yii\console\Controller;
-use yii\db\Expression;
 
 /**
  * @author  Alexey Samoylov <alexey.samoylov@gmail.com>
@@ -79,8 +78,8 @@ class EmailController extends Controller {
 		try {
 			$result = EmailManager::getInstance()->send($model->from, $model->to, $model->subject, $model->text, $model->files, $model->bcc);
 			if ($result) {
-				$model->sent_at = new Expression('NOW()');
-				$model->status = EmailMessage::STATUS_SENT;
+				$model->sent_at = time();
+				$model->status  = EmailMessage::STATUS_SENT;
 			} else {
 				$model->status = EmailMessage::STATUS_ERROR;
 			}

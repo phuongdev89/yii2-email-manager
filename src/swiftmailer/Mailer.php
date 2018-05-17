@@ -22,12 +22,19 @@ class Mailer extends \yii\swiftmailer\Mailer {
 		parent::init();
 		if (Module::hasSetting()) {
 			$configure              = [
-				'class'      => 'Swift_SmtpTransport',
-				'host'       => Yii::$app->setting->get('smtp_host'),
-				'username'   => Yii::$app->setting->get('smtp_user'),
-				'password'   => Yii::$app->setting->get('smtp_password'),
-				'port'       => Yii::$app->setting->get('smtp_port'),
-				'encryption' => Yii::$app->setting->get('smtp_encryption'),
+				'class'         => 'Swift_SmtpTransport',
+				'host'          => Yii::$app->setting->get('smtp_host'),
+				'username'      => Yii::$app->setting->get('smtp_user'),
+				'password'      => Yii::$app->setting->get('smtp_password'),
+				'port'          => Yii::$app->setting->get('smtp_port'),
+				'encryption'    => Yii::$app->setting->get('smtp_encryption'),
+				'streamOptions' => [
+					'ssl' => [
+						'allow_self_signed' => true,
+						'verify_peer'       => false,
+						'verify_peer_name'  => false,
+					],
+				],
 			];
 			$this->useFileTransport = false;
 			$this->setTransport($configure);

@@ -48,7 +48,8 @@
 		"navatech/yii2-roxymce" : "^2.0"
 	},
 	"suggest" : {
-		"cboden/ratchet" : "to use loop instead of for-cycle in daemon"
+		"cboden/ratchet" : "to use loop instead of for-cycle in daemon",
+		"navatech/yii2-setting": "1.0.*"
 	},
 	"autoload" : {
 		"psr-4" : {
