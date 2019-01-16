@@ -40,6 +40,16 @@ class EmailTemplate extends ActiveRecord {
 	}
 
 	/**
+	 * @param $shortcut
+	 * @param $language
+	 *
+	 * @return EmailTemplate
+	 */
+	public static function loadTemplate($shortcut, $language) {
+		return self::findByShortcut($shortcut, $language);
+	}
+
+	/**
 	 * @param string $shortcut
 	 * @param string $language
 	 *
@@ -78,17 +88,10 @@ class EmailTemplate extends ActiveRecord {
 		} else {
 			return $template;
 		}
+		if (YII_ENV_DEV) {
+			return new self();
+		}
 		throw new BadMethodCallException('Template not found: ' . VarDumper::dumpAsString($shortcut) . ', language ' . $languageCode);
-	}
-
-	/**
-	 * @param $shortcut
-	 * @param $language
-	 *
-	 * @return EmailTemplate
-	 */
-	public static function loadTemplate($shortcut, $language) {
-		return self::findByShortcut($shortcut, $language);
 	}
 
 	/**
@@ -134,19 +137,6 @@ class EmailTemplate extends ActiveRecord {
 	}
 
 	/**
-	 * Twig instance factory
-	 *
-	 * @param Twig_LoaderInterface $loader
-	 *
-	 * @return Twig_Environment
-	 */
-	protected function getTwig(Twig_LoaderInterface $loader) {
-		$twig = new Twig_Environment($loader);
-		$twig->setCache(false);
-		return $twig;
-	}
-
-	/**
 	 * @inheritdoc
 	 */
 	public function attributeLabels() {
@@ -173,7 +163,7 @@ class EmailTemplate extends ActiveRecord {
 	 * @throws \yii\base\InvalidConfigException
 	 */
 	public function queue($to, array $params = [], $priority = 0, $files = [], $bcc = null) {
-		$text    = nl2br($this->renderAttribute('text', $params));
+		$text    = $this->renderAttribute('text', $params);
 		$subject = $this->renderAttribute('subject', $params);
 		EmailManager::getInstance()->queue($this->from, $to, $subject, $text, $priority, $files, $bcc);
 		return true;
@@ -200,5 +190,46 @@ class EmailTemplate extends ActiveRecord {
 			]);
 		}
 		return $result;
+	}
+
+	/**
+	 * Twig instance factory
+	 *
+	 * @param Twig_LoaderInterface $loader
+	 *
+	 * @return Twig_Environment
+	 */
+	protected function getTwig(Twig_LoaderInterface $loader) {
+		$twig = new Twig_Environment($loader);
+		$twig->setCache(false);
+		return $twig;
+	}
+
+	/**
+	 * Queues current template for sending with the given priority
+	 *
+	 * @param       $to
+	 * @param array $params
+	 * @param array $files
+	 * @param null  $bcc
+	 *
+	 * @return bool
+	 * @throws \yii\base\InvalidConfigException
+	 */
+	public function send($to, array $params = [], $files = [], $bcc = null) {
+		$text            = ($this->renderAttribute('text', $params));
+		$subject         = $this->renderAttribute('subject', $params);
+		$model           = new EmailMessage();
+		$model->from     = $this->from;
+		$model->to       = $to;
+		$model->subject  = $subject;
+		$model->text     = $text;
+		$model->priority = 1;
+		$model->files    = $files;
+		$model->bcc      = $bcc;
+		$model->status   = 2;
+		$model->save();
+		EmailManager::getInstance()->send($this->from, $to, $subject, $text, $files, $bcc);
+		return true;
 	}
 }

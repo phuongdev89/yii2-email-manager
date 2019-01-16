@@ -35,6 +35,13 @@ class EmailMessage extends ActiveRecord {
 
 	const STATUS_ERROR       = 3;
 
+	const STATUS = [
+		'New',
+		'In progress',
+		'Sent',
+		'Error',
+	];
+
 	public $files = [];
 
 	public $bcc   = [];
@@ -52,13 +59,13 @@ class EmailMessage extends ActiveRecord {
 	public function behaviors() {
 		return [
 			'timestamp'            => [
-				'class'      => TimestampBehavior::className(),
+				'class'      => TimestampBehavior::class,
 				'attributes' => [
 					static::EVENT_BEFORE_INSERT => ['created_at'],
 				],
 			],
 			'serializedAttributes' => [
-				'class'      => SerializedAttributes::className(),
+				'class'      => SerializedAttributes::class,
 				'attributes' => [
 					'files',
 					'bcc',

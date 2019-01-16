@@ -22,10 +22,26 @@ class TemplateController extends Controller {
 	 */
 	public function behaviors() {
 		return [
-			'verbs' => [
-				'class' => VerbFilter::className(),
+			'verbs'  => [
+				'class'   => VerbFilter::class,
 				'actions' => [
 					'delete' => ['post'],
+				],
+			],
+			'access' => [
+				'class' => AccessControl::class,
+				'rules' => [
+					[
+						'actions' => [
+							'index',
+							'view',
+							'update',
+							'create',
+							'delete',
+						],
+						'allow'   => true,
+						'roles'   => ['@'],
+					],
 				],
 			],
 		];

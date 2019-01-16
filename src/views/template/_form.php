@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
 	<?= $form->field($model, 'from')->textInput(['maxlength' => 255]) ?>
 	<?= $form->field($model, 'subject')->textInput(['maxlength' => 255]) ?>
 
-	<?= $form->field($model, 'text', ['enableClientValidation' => false])->widget(RoxyMceWidget::className()) ?>
+	<?= $form->field($model, 'text', ['enableClientValidation' => false])->widget(RoxyMceWidget::class) ?>
 
 	<div class="form-group">
 		<?= Html::submitButton($model->isNewRecord ? Yii::t('email', 'Create') : Yii::t('email', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
