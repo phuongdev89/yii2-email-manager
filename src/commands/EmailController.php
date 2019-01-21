@@ -76,10 +76,14 @@ class EmailController extends Controller {
 		}
 		$transaction = $db->beginTransaction();
 		try {
-			$result = EmailManager::getInstance()->send($model->from, $model->to, $model->subject, $model->text, $model->files, $model->bcc);
-			if ($result) {
-				$model->sent_at = time();
-				$model->status  = EmailMessage::STATUS_SENT;
+			if (filter_var($model->to, FILTER_VALIDATE_EMAIL)) {
+				$result = EmailManager::getInstance()->send($model->from, $model->to, $model->subject, $model->text, $model->files, $model->bcc);
+				if ($result) {
+					$model->sent_at = time();
+					$model->status  = EmailMessage::STATUS_SENT;
+				} else {
+					$model->status = EmailMessage::STATUS_ERROR;
+				}
 			} else {
 				$model->status = EmailMessage::STATUS_ERROR;
 			}
@@ -112,5 +116,27 @@ class EmailController extends Controller {
 	 */
 	public function actionSendOne() {
 		$this->sendOne();
+	}
+
+	/**
+	 * @throws \yii\db\Exception
+	 */
+	public function actionReSend() {
+		$db          = \Yii::$app->db;
+		$transaction = $db->beginTransaction();
+		try {
+			/**@var EmailMessage[] $emails */
+			$emails = EmailMessage::find()->where(['status' => EmailMessage::STATUS_IN_PROGRESS])->andWhere([
+				'<',
+				'created_at',
+				strtotime('2 minutes ago'),
+			])->all();
+			foreach ($emails as $email) {
+				$email->updateAttributes(['status' => EmailMessage::STATUS_NEW]);
+			}
+			$transaction->commit();
+		} catch (\Exception $e) {
+			$transaction->rollBack();
+		}
 	}
 }

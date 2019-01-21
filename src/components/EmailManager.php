@@ -73,7 +73,7 @@ class EmailManager extends Component implements TransportInterface {
 	 * @param array $files
 	 * @param null  $bcc
 	 *
-	 * @return bool
+	 * @return bool|EmailMessage
 	 */
 	public function queue($from, $to, $subject, $text, $priority = 0, $files = [], $bcc = null) {
 		if (is_array($bcc)) {
@@ -87,7 +87,11 @@ class EmailManager extends Component implements TransportInterface {
 		$model->priority = $priority;
 		$model->files    = $files;
 		$model->bcc      = $bcc;
-		return $model->save();
+		if ($model->save()) {
+			return $model;
+		} else {
+			return false;
+		}
 	}
 
 	/**
