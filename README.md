@@ -42,6 +42,8 @@ php yii migrate --migrationPath=@vendor/navatech/yii2-email-manager/src/migratio
         'emailManager' => [
             'class' => '\navatech\email\EmailManager',
             'defaultTransport' => 'yiiMailer',
+            'resendAfter'      => 5,//resend after 5 mins if stuck
+            'tryTime'          => 3,//max try time resend
             'transports' => [
                 'yiiMailer' => [
                     'class' => '\navatech\email\transports\YiiMailer',
@@ -54,6 +56,11 @@ php yii migrate --migrationPath=@vendor/navatech/yii2-email-manager/src/migratio
                 ],
                 */
             ],
+        ],
+    ],
+    'modules' => [
+        'mailer'   => [
+            'class'         => 'navatech\email\Module',
         ],
     ]
 ```
@@ -73,6 +80,8 @@ First you need `navatech/yii2-setting` installed, create 5 records on Setting mo
         'emailManager'  => [
             'class'            => '\navatech\email\components\EmailManager',
             'defaultTransport' => 'yiiMailer',
+            'resendAfter'      => 5,//resend after 5 mins if stuck
+            'tryTime'          => 3,//max try time resend
             'transports'       => [
                 'yiiMailer' => [
                     'class' => '\navatech\email\transports\YiiMailer',
@@ -87,22 +96,36 @@ First you need `navatech/yii2-setting` installed, create 5 records on Setting mo
             ],
         ],
     ]
+    'modules' => [
+        'mailer'   => [
+            'class'         => 'navatech\email\Module',
+        ],
+    ]
 ```
 Add command to the list of the available commands. Put it into console app configuration:
 ```
     'controllerMap' => [
-        'email' => '\navatech\email\commands\EmailCommand',
+        'email' => '\navatech\email\commands\EmailController',
     ],
 ```
-Add email sending daemon into crontab via lockrun or run-one utils:
+Add email sending daemon into crontab, can be via lockrun or run-one utils:
 ```
-    */5 * * * * run-one php /your/site/path/yii email/run-spool-daemon
+    */5 * * * * php /your/site/path/yii email/run-spool-daemon
 ```
 OR, if you will use cboden/ratchet
 ```
-    */5 * * * * run-one php /your/site/path/yii email/run-loop-daemon
+    */5 * * * * php /your/site/path/yii email/run-loop-daemon
 ```
 # Usage
+##Backend
+Access this url:
+```
+http://backend.yourdomain.com/mailer
+```
+or
+```
+http://backend.yourdomain.com/index.php?r=mailer
+```
 ##Simple usage
 ```
     // obtain component instance

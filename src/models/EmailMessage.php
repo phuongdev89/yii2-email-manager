@@ -24,6 +24,7 @@ use yii\db\ActiveRecord;
  * @property string  $sent_at
  * @property string  $bcc
  * @property string  $files
+ * @property int     $try_time
  */
 class EmailMessage extends ActiveRecord {
 
@@ -35,7 +36,7 @@ class EmailMessage extends ActiveRecord {
 
 	const STATUS_ERROR       = 3;
 
-	const STATUS = [
+	const STATUS             = [
 		'New',
 		'In progress',
 		'Sent',
@@ -83,6 +84,7 @@ class EmailMessage extends ActiveRecord {
 				[
 					'status',
 					'priority',
+					'try_time',
 				],
 				'integer',
 			],
@@ -124,6 +126,7 @@ class EmailMessage extends ActiveRecord {
 			'text'       => Yii::t('email', 'Text'),
 			'created_at' => Yii::t('email', 'Created At'),
 			'sent_at'    => Yii::t('email', 'Sent At'),
+			'try_time'   => Yii::t('email', 'Try Time'),
 		];
 	}
 }

@@ -29,6 +29,16 @@ class EmailManager extends Component implements TransportInterface {
 	public $defaultLanguage = 'en';
 
 	/**
+	 * @var int Try time if stuck
+	 */
+	public $tryTime = 3;
+
+	/**
+	 * @var int in minutes resend after stuck
+	 */
+	public $resendAfter = 5;
+
+	/**
 	 * Singleton factory for obtaining manager instance
 	 *
 	 * @return EmailManager

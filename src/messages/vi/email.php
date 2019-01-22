@@ -13,7 +13,9 @@ return [
 	'Create Email Template'          => 'Thêm mới mẫu Email',
 	'Update Email Template'          => 'Sửa mẫu Email',
 	'Email Templates'                => 'Danh sách mẫu Email',
+	'Email History'                  => 'Lịch sử gửi Email',
 	'Create'                         => 'Thêm mới',
 	'Update'                         => 'Cập nhật',
+	'Try Time'                       => 'Thử lại',
 	'Error compiling email {0}: {1}' => 'Có lỗi xảy ra khi nạp email {0}: {1}',
 ];

@@ -40,12 +40,44 @@ class EmailController extends Controller {
 	 */
 	protected function runChunk($chunkSize = 100) {
 		for ($i = 0; $i < $chunkSize; $i ++) {
+			$this->reSend();
 			$r = $this->sendOne();
 			if (!$r) {
 				return false;
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * @throws \yii\db\Exception
+	 */
+	public function reSend() {
+		/**@var EmailManager $instance */
+		$instance    = \Yii::$app->get('emailManager');
+		$db          = \Yii::$app->db;
+		$transaction = $db->beginTransaction();
+		try {
+			/**@var EmailMessage[] $emails */
+			$emails = EmailMessage::find()->where(['status' => EmailMessage::STATUS_IN_PROGRESS])->andWhere([
+				'<',
+				'created_at',
+				strtotime($instance->resendAfter . ' minutes ago'),
+			])->andWhere([
+				'<',
+				'try_time',
+				$instance->tryTime,
+			])->all();
+			foreach ($emails as $email) {
+				$email->updateAttributes([
+					'status'   => EmailMessage::STATUS_NEW,
+					'try_time' => $email->try_time + 1,
+				]);
+			}
+			$transaction->commit();
+		} catch (\Exception $e) {
+			$transaction->rollBack();
+		}
 	}
 
 	/**
@@ -116,27 +148,5 @@ class EmailController extends Controller {
 	 */
 	public function actionSendOne() {
 		$this->sendOne();
-	}
-
-	/**
-	 * @throws \yii\db\Exception
-	 */
-	public function actionReSend() {
-		$db          = \Yii::$app->db;
-		$transaction = $db->beginTransaction();
-		try {
-			/**@var EmailMessage[] $emails */
-			$emails = EmailMessage::find()->where(['status' => EmailMessage::STATUS_IN_PROGRESS])->andWhere([
-				'<',
-				'created_at',
-				strtotime('2 minutes ago'),
-			])->all();
-			foreach ($emails as $email) {
-				$email->updateAttributes(['status' => EmailMessage::STATUS_NEW]);
-			}
-			$transaction->commit();
-		} catch (\Exception $e) {
-			$transaction->rollBack();
-		}
 	}
 }
