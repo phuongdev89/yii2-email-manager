@@ -2,11 +2,11 @@
 
 namespace navatech\email\controllers;
 
-use backend\components\Controller;
-use common\models\EmailMessage;
-use common\models\search\EmailMessageSearch;
+use navatech\email\models\EmailMessage;
+use navatech\email\models\search\EmailMessageSearch;
 use Yii;
 use yii\filters\AccessControl;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -84,7 +84,7 @@ class MessageController extends Controller {
 		$emailMessage->attributes = $model->attributes;
 		$emailMessage->status     = EmailMessage::STATUS_NEW;
 		$emailMessage->save();
-		Yii::$app->session->setFlash('success', 'Email đã được gửi đi');
+		Yii::$app->session->setFlash('success', Yii::t('email', 'Email has been sent!'));
 		return $this->redirect([
 			'index',
 		]);

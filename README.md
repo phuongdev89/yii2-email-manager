@@ -61,6 +61,7 @@ php yii migrate --migrationPath=@vendor/navatech/yii2-email-manager/src/migratio
     'modules' => [
         'mailer'   => [
             'class'         => 'navatech\email\Module',
+            'cleanAfter'    => 30//clean after days
         ],
     ]
 ```
@@ -99,7 +100,8 @@ First you need `navatech/yii2-setting` installed, create 5 records on Setting mo
     'modules' => [
         'mailer'   => [
             'class'         => 'navatech\email\Module',
-        ],
+            'cleanAfter'    => 30//clean after days
+      ],
     ]
 ```
 Add command to the list of the available commands. Put it into console app configuration:

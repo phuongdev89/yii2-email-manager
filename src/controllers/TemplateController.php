@@ -5,6 +5,7 @@ namespace navatech\email\controllers;
 use navatech\email\models\EmailTemplate;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -54,6 +55,7 @@ class TemplateController extends Controller {
 	 * @param $language
 	 *
 	 * @return \yii\web\Response
+	 * @throws \yii\base\InvalidConfigException
 	 */
 	public function actionTest($shortcut, $language) {
 		EmailTemplate::loadTemplate($shortcut, $language)->queue(\Yii::$app->params['adminEmail']);
@@ -79,6 +81,7 @@ class TemplateController extends Controller {
 	 * @param integer $id
 	 *
 	 * @return mixed
+	 * @throws NotFoundHttpException
 	 */
 	public function actionView($id) {
 		return $this->render('view', [
@@ -129,6 +132,7 @@ class TemplateController extends Controller {
 	 * @param integer $id
 	 *
 	 * @return mixed
+	 * @throws NotFoundHttpException
 	 */
 	public function actionUpdate($id) {
 		$model = $this->findModel($id);
@@ -151,6 +155,9 @@ class TemplateController extends Controller {
 	 * @param integer $id
 	 *
 	 * @return mixed
+	 * @throws NotFoundHttpException
+	 * @throws \Throwable
+	 * @throws \yii\db\StaleObjectException
 	 */
 	public function actionDelete($id) {
 		$this->findModel($id)->delete();

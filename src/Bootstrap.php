@@ -8,6 +8,7 @@
  * @time    11:50 PM
  * @version 2.0.0
  */
+
 namespace navatech\email;
 
 use Yii;
@@ -21,6 +22,8 @@ class Bootstrap implements BootstrapInterface {
 	 * Bootstrap method to be called during application bootstrap stage.
 	 *
 	 * @param Application $app the application currently running
+	 *
+	 * @throws \yii\base\InvalidConfigException
 	 */
 	public function bootstrap($app) {
 		if (!isset($app->get('i18n')->translations['email*'])) {

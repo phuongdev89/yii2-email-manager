@@ -17,15 +17,21 @@ class EmailTemplateLoader extends Component implements Twig_LoaderInterface {
 	/** @var string Attribute name to fetch template from */
 	public $attributeName = 'text';
 
+	/**
+	 * @param $name
+	 *
+	 * @return mixed|string
+	 * @throws \yii\base\InvalidConfigException
+	 */
 	public function getSource($name) {
 		$currentLanguage = \Yii::$app->language;
 		$defaultLanguage = ArrayHelper::getValue(EmailManager::getInstance()->languages, 0, 'en-US');
 		/** @var EmailTemplate $model */
 		$model = EmailTemplate::find()->where(['shortcut' => $name])->andWhere('language = :currentLanguage OR language = :defaultLanguage OR language = :systemDefaultLanguage', [
-				':currentLanguage'       => $currentLanguage,
-				':defaultLanguage'       => $defaultLanguage,
-				':systemDefaultLanguage' => 'en-US',
-			])->one();
+			':currentLanguage'       => $currentLanguage,
+			':defaultLanguage'       => $defaultLanguage,
+			':systemDefaultLanguage' => 'en-US',
+		])->one();
 		if (!$model) {
 			\Yii::error("Missing template {$name}, current language {$currentLanguage}, default language {$defaultLanguage}", 'email');
 			return "!!! UNKNOWN TEMPLATE {$name} !!!";

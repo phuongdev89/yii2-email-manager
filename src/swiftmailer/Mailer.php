@@ -17,6 +17,7 @@ class Mailer extends \yii\swiftmailer\Mailer {
 
 	/**
 	 * {@inheritDoc}
+	 * @throws \yii\base\InvalidConfigException
 	 */
 	public function init() {
 		parent::init();

@@ -1,15 +1,17 @@
 <?php
 
-use common\models\EmailMessage;
+use kartik\grid\DataColumn;
 use kartik\grid\GridView;
+use navatech\email\helpers\EmailHelper;
+use navatech\email\models\EmailMessage;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
 
 /**
- * @var yii\web\View                            $this
- * @var yii\data\ActiveDataProvider             $dataProvider
- * @var common\models\search\EmailMessageSearch $searchModel
+ * @var yii\web\View                                    $this
+ * @var yii\data\ActiveDataProvider                     $dataProvider
+ * @var navatech\email\models\search\EmailMessageSearch $searchModel
  */
 $this->title                   = Yii::t('email', 'Email History');
 $this->params['breadcrumbs'][] = $this->title;
@@ -21,12 +23,12 @@ $this->params['breadcrumbs'][] = $this->title;
 			'dataProvider' => $dataProvider,
 			'filterModel'  => $searchModel,
 			'columns'      => [
-				'id',
+				['class' => 'yii\grid\SerialColumn'],
 				[
 					'attribute' => 'to',
 					'format'    => 'html',
 					'value'     => function(EmailMessage $data) {
-						return \common\helpers\EmailHelper::protectOff($data->to);
+						return EmailHelper::protectOff($data->to);
 					},
 				],
 				'subject',
@@ -38,17 +40,41 @@ $this->params['breadcrumbs'][] = $this->title;
 					},
 				],
 				[
-					'attribute' => 'created_at',
-					'format'    => [
+					'class'               => DataColumn::class,
+					'attribute'           => 'created_at',
+					'filterType'          => GridView::FILTER_DATE_RANGE,
+					'filterWidgetOptions' => [
+						'readonly'      => 'readonly',
+						'convertFormat' => true,
+						'pluginOptions' => [
+							'locale'    => ['format' => 'Y-m-d'],
+							'autoclose' => true,
+						],
+						'pluginEvents'  => [
+							"cancel.daterangepicker" => 'function(ev,picker){$(this).val("").trigger("change");}',
+						],
+					],
+					'format'              => [
 						'datetime',
-						(isset(Yii::$app->modules['datecontrol']['displaySettings']['datetime'])) ? Yii::$app->modules['datecontrol']['displaySettings']['datetime'] : 'd-m-Y H:i:s A',
 					],
 				],
 				[
-					'attribute' => 'sent_at',
-					'format'    => [
+					'class'               => DataColumn::class,
+					'attribute'           => 'sent_at',
+					'filterType'          => GridView::FILTER_DATE_RANGE,
+					'filterWidgetOptions' => [
+						'readonly'      => 'readonly',
+						'convertFormat' => true,
+						'pluginOptions' => [
+							'locale'    => ['format' => 'Y-m-d'],
+							'autoclose' => true,
+						],
+						'pluginEvents'  => [
+							"cancel.daterangepicker" => 'function(ev,picker){$(this).val("").trigger("change");}',
+						],
+					],
+					'format'              => [
 						'datetime',
-						(isset(Yii::$app->modules['datecontrol']['displaySettings']['datetime'])) ? Yii::$app->modules['datecontrol']['displaySettings']['datetime'] : 'd-m-Y H:i:s A',
 					],
 				],
 				[
@@ -59,7 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
 							return Html::a('<i class="fa fa-refresh"></i>', Url::to([
 								'/mailer/message/resend',
 								'id' => $model->id,
-							]), ['title' => Yii::t('yii', 'Resend'),]);
+							]), ['title' => Yii::t('email', 'Resend'),]);
 						},
 					],
 				],
@@ -72,11 +98,14 @@ $this->params['breadcrumbs'][] = $this->title;
 				'heading'    => '',
 				'type'       => 'info',
 				'before'     => '',
-				'after'      => Html::a('<i class="glyphicon glyphicon-repeat"></i> Reset List', ['index'], ['class' => 'btn btn-info']),
+				'after'      => Html::a('<i class="glyphicon glyphicon-repeat"></i> ' . Yii::t('email', 'Reset List'), ['index'], ['class' => 'btn btn-info']),
 				'showFooter' => false,
 			],
 		]);
 	} catch (Exception $e) {
+		echo '<pre>';
+		print_r($e);
+		die;
 	}
 	Pjax::end(); ?>
 

@@ -44,6 +44,7 @@ class EmailTemplate extends ActiveRecord {
 	 * @param $language
 	 *
 	 * @return EmailTemplate
+	 * @throws \yii\base\InvalidConfigException
 	 */
 	public static function loadTemplate($shortcut, $language) {
 		return self::findByShortcut($shortcut, $language);
@@ -54,6 +55,7 @@ class EmailTemplate extends ActiveRecord {
 	 * @param string $language
 	 *
 	 * @return self
+	 * @throws \yii\base\InvalidConfigException
 	 */
 	public static function findByShortcut($shortcut, $language = null) {
 		if ($language == null) {

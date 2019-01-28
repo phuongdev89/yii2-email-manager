@@ -18,9 +18,20 @@ use yii\mail\MailerInterface;
  */
 class YiiMailer extends Component implements TransportInterface {
 
+	/**
+	 * @param       $from
+	 * @param       $to
+	 * @param       $subject
+	 * @param       $text
+	 * @param array $files
+	 * @param null  $bcc
+	 *
+	 * @return bool|mixed
+	 * @throws \yii\base\InvalidConfigException
+	 */
 	public function send($from, $to, $subject, $text, $files = [], $bcc = null) {
 		/** @var MailerInterface $mailer */
-		$mailer = \Yii::$app->get('mailer');
+		$mailer  = \Yii::$app->get('mailer');
 		$message = $mailer->compose()->setFrom($this->parseFrom($from))->setTo($to)->setSubject($subject)->setHtmlBody($text);
 		if ($bcc) {
 			$message->setBcc($this->parseRecipients($bcc));
@@ -47,7 +58,7 @@ class YiiMailer extends Component implements TransportInterface {
 		}
 		$email = array_pop($parts);
 		$email = trim($email, '<>');
-		$name = implode(' ', $parts);
+		$name  = implode(' ', $parts);
 		return [$email => $name];
 	}
 

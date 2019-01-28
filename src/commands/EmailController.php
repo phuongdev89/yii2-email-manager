@@ -4,6 +4,7 @@ namespace navatech\email\commands;
 
 use navatech\email\components\EmailManager;
 use navatech\email\models\EmailMessage;
+use navatech\email\Module;
 use React\EventLoop\Factory;
 use yii\console\Controller;
 
@@ -21,6 +22,8 @@ class EmailController extends Controller {
 	 *
 	 * @param int $loopLimit
 	 * @param int $chunkSize
+	 *
+	 * @throws \Exception
 	 */
 	public function actionRunSpoolDaemon($loopLimit = 1000, $chunkSize = 100) {
 		set_time_limit(0);
@@ -28,6 +31,25 @@ class EmailController extends Controller {
 			$this->runChunk($chunkSize);
 			sleep(1);
 		}
+	}
+
+	/**
+	 * Run daemon based on ReactPHP loop
+	 */
+	public function actionRunLoopDaemon() {
+		$loop = Factory::create();
+		$loop->addPeriodicTimer(1, function() {
+			$this->runChunk();
+		});
+		$loop->run();
+	}
+
+	/**
+	 * Send one email action
+	 * @throws \Exception
+	 */
+	public function actionSendOne() {
+		$this->sendOne();
 	}
 
 	/**
@@ -51,6 +73,7 @@ class EmailController extends Controller {
 
 	/**
 	 * @throws \yii\db\Exception
+	 * @throws \yii\base\InvalidConfigException
 	 */
 	public function reSend() {
 		/**@var EmailManager $instance */
@@ -84,7 +107,6 @@ class EmailController extends Controller {
 	 * Send one email from queue
 	 * @return bool
 	 * @throws \Exception
-	 * @throws \yii\db\Exception
 	 */
 	public function sendOne() {
 		$db          = \Yii::$app->db;
@@ -132,21 +154,19 @@ class EmailController extends Controller {
 	}
 
 	/**
-	 * Run daemon based on ReactPHP loop
+	 * @throws \Throwable
+	 * @throws \yii\db\StaleObjectException
 	 */
-	public function actionRunLoopDaemon() {
-		$loop = Factory::create();
-		$loop->addPeriodicTimer(1, function() {
-			$this->runChunk();
-		});
-		$loop->run();
-	}
-
-	/**
-	 * Send one email action
-	 * @throws \Exception
-	 */
-	public function actionSendOne() {
-		$this->sendOne();
+	public function clean() {
+		/**@var Module $module */
+		$module        = \Yii::$app->getModule('mailer');
+		$emailMessages = EmailMessage::find()->andWhere([
+			'<',
+			'created_at',
+			(time() - ($module->cleanAfter * 3600 * 24)),
+		])->all();
+		foreach ($emailMessages as $emailMessage) {
+			$emailMessage->delete();
+		}
 	}
 }

@@ -10,4 +10,5 @@ namespace navatech\email;
  */
 class Module extends \navatech\base\Module {
 
+	public $cleanAfter = 30;
 }

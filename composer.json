@@ -37,7 +37,7 @@
 	},
 	"minimum-stability" : "stable",
 	"require" : {
-		"php" : ">=5.4.0",
+		"php" : ">=5.6.0",
 		"yiisoft/yii2" : "~2.0.4",
 		"react/event-loop" : "~0.4",
 		"mailgun/mailgun-php" : "^2.0",

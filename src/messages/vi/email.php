@@ -18,4 +18,7 @@ return [
 	'Update'                         => 'Cập nhật',
 	'Try Time'                       => 'Thử lại',
 	'Error compiling email {0}: {1}' => 'Có lỗi xảy ra khi nạp email {0}: {1}',
+	'Resend'                         => 'Gửi lại',
+	'Reset List'                     => 'Làm mới',
+	'Email has been sent!'           => 'Email đã được gửi đi!',
 ];
