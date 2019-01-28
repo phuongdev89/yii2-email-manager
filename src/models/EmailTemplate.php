@@ -228,7 +228,7 @@ class EmailTemplate extends ActiveRecord {
 		$model->subject  = $subject;
 		$model->text     = $text;
 		$model->priority = 1;
-		$model->files    = Json::encode($files);
+		$model->files    = $files;
 		$model->bcc      = $bcc;
 		$model->status   = 2;
 		$model->save();
