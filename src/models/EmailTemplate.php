@@ -13,6 +13,7 @@ use Twig_LoaderInterface;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
 use yii\helpers\VarDumper;
 
 /**
@@ -227,7 +228,7 @@ class EmailTemplate extends ActiveRecord {
 		$model->subject  = $subject;
 		$model->text     = $text;
 		$model->priority = 1;
-		$model->files    = $files;
+		$model->files    = Json::encode($files);
 		$model->bcc      = $bcc;
 		$model->status   = 2;
 		$model->save();
