@@ -24,6 +24,7 @@ class EmailController extends Controller {
 	 * @param int $chunkSize
 	 *
 	 * @throws \Exception
+	 * @throws \Throwable
 	 */
 	public function actionRunSpoolDaemon($loopLimit = 1000, $chunkSize = 100) {
 		set_time_limit(0);
@@ -59,9 +60,11 @@ class EmailController extends Controller {
 	 *
 	 * @return bool
 	 * @throws \Exception
+	 * @throws \Throwable
 	 */
 	protected function runChunk($chunkSize = 100) {
 		for ($i = 0; $i < $chunkSize; $i ++) {
+			$this->clean();
 			$this->reSend();
 			$r = $this->sendOne();
 			if (!$r) {
