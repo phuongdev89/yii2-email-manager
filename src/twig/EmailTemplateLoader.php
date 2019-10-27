@@ -8,14 +8,15 @@ namespace navatech\email\twig;
 
 use navatech\email\components\EmailManager;
 use navatech\email\models\EmailTemplate;
+use Twig\Error\LoaderError;
+use Twig\Loader\LoaderInterface;
 use Twig\Source;
-use Twig_LoaderInterface;
 use Yii;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
 
-class EmailTemplateLoader extends Component implements Twig_LoaderInterface {
+class EmailTemplateLoader extends Component implements LoaderInterface {
 
 	/** @var string Attribute name to fetch template from */
 	public $attributeName = 'text';
@@ -30,16 +31,19 @@ class EmailTemplateLoader extends Component implements Twig_LoaderInterface {
 		$currentLanguage = Yii::$app->language;
 		$defaultLanguage = ArrayHelper::getValue(EmailManager::getInstance()->languages, 0, 'en-US');
 		/** @var EmailTemplate $model */
-		$model = EmailTemplate::find()->where(['shortcut' => $name])->andWhere('language = :currentLanguage OR language = :defaultLanguage OR language = :systemDefaultLanguage', [
-			':currentLanguage'       => $currentLanguage,
-			':defaultLanguage'       => $defaultLanguage,
-			':systemDefaultLanguage' => 'en-US',
+		$model = EmailTemplate::find()->where([
+			'shortcut' => $name,
+			'language' => [
+				$currentLanguage,
+				$defaultLanguage,
+				'en-US',
+			],
 		])->one();
-		if (!$model) {
+		if ($model === null) {
 			Yii::error("Missing template {$name}, current language {$currentLanguage}, default language {$defaultLanguage}", 'email');
-			return "!!! UNKNOWN TEMPLATE {$name} !!!";
+			return new Source("!!! UNKNOWN TEMPLATE {$name} !!!", $name);
 		}
-		return $model->getAttribute($this->attributeName);
+		return new Source($model->getAttribute($this->attributeName), $name);
 	}
 
 	/**
@@ -75,8 +79,14 @@ class EmailTemplateLoader extends Component implements Twig_LoaderInterface {
 	 * @param string $name The name of the template to check if we can load
 	 *
 	 * @return bool If the template source code is handled by this loader or not
+	 * @throws InvalidConfigException
 	 */
 	public function exists($name) {
-		return true;
+		try {
+			$this->getSource($name);
+			return true;
+		} catch (LoaderError $e) {
+			return false;
+		}
 	}
 }

@@ -6,8 +6,10 @@
 
 namespace navatech\email\transports;
 
+use Exception;
 use Http\Adapter\Guzzle6\Client;
 use navatech\email\interfaces\TransportInterface;
+use Yii;
 use yii\base\Component;
 use yii\helpers\VarDumper;
 
@@ -38,11 +40,13 @@ class MailGun extends Component implements TransportInterface {
 			'subject' => $subject,
 			'html'    => $text,
 		];
+		if($files!=null){
+			$postData['attachment'] = $files;
+		}
 		try {
-			$this->_api->sendMessage($this->domain, $postData, $files);
-		} catch (\Exception $e) {
-			\Yii::error('Send error: ' . $e->getMessage(), 'email\MailGun');
-			\Yii::trace(VarDumper::dumpAsString($postData), 'email\MailGun');
+			$this->_api->messages()->send($this->domain, $postData);
+		} catch (Exception $e) {
+			Yii::error('Send error: ' . $e->getMessage(), 'email\MailGun');
 			return false;
 		}
 		return true;

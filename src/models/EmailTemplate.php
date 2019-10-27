@@ -8,12 +8,12 @@ use navatech\email\components\EmailManager;
 use navatech\email\Module;
 use navatech\email\twig\EmailTemplateLoader;
 use navatech\language\models\Language;
-use Twig_Environment;
+use Twig\Environment;
 use Twig_LoaderInterface;
 use Yii;
+use yii\base\InvalidConfigException;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Json;
 use yii\helpers\VarDumper;
 
 /**
@@ -45,7 +45,7 @@ class EmailTemplate extends ActiveRecord {
 	 * @param $language
 	 *
 	 * @return EmailTemplate
-	 * @throws \yii\base\InvalidConfigException
+	 * @throws InvalidConfigException
 	 */
 	public static function loadTemplate($shortcut, $language) {
 		return self::findByShortcut($shortcut, $language);
@@ -56,7 +56,7 @@ class EmailTemplate extends ActiveRecord {
 	 * @param string $language
 	 *
 	 * @return self
-	 * @throws \yii\base\InvalidConfigException
+	 * @throws InvalidConfigException
 	 */
 	public static function findByShortcut($shortcut, $language = null) {
 		if ($language == null) {
@@ -154,25 +154,6 @@ class EmailTemplate extends ActiveRecord {
 	}
 
 	/**
-	 * Queues current template for sending with the given priority
-	 *
-	 * @param       $to
-	 * @param array $params
-	 * @param int   $priority
-	 * @param array $files
-	 * @param null  $bcc
-	 *
-	 * @return bool
-	 * @throws \yii\base\InvalidConfigException
-	 */
-	public function queue($to, array $params = [], $priority = 0, $files = [], $bcc = null) {
-		$text    = $this->renderAttribute('text', $params);
-		$subject = $this->renderAttribute('subject', $params);
-		EmailManager::getInstance()->queue($this->from, $to, $subject, $text, $priority, $files, $bcc);
-		return true;
-	}
-
-	/**
 	 * Renders attribute using twig
 	 *
 	 * @param string $attribute
@@ -200,12 +181,31 @@ class EmailTemplate extends ActiveRecord {
 	 *
 	 * @param Twig_LoaderInterface $loader
 	 *
-	 * @return Twig_Environment
+	 * @return Environment
 	 */
 	protected function getTwig(Twig_LoaderInterface $loader) {
-		$twig = new Twig_Environment($loader);
+		$twig = new Environment($loader);
 		$twig->setCache(false);
 		return $twig;
+	}
+
+	/**
+	 * Queues current template for sending with the given priority
+	 *
+	 * @param       $to
+	 * @param array $params
+	 * @param int   $priority
+	 * @param array $files
+	 * @param null  $bcc
+	 *
+	 * @return bool
+	 * @throws InvalidConfigException
+	 */
+	public function queue($to, array $params = [], $priority = 0, $files = [], $bcc = null) {
+		$text    = $this->renderAttribute('text', $params);
+		$subject = $this->renderAttribute('subject', $params);
+		EmailManager::getInstance()->queue($this->from, $to, $subject, $text, $priority, $files, $bcc);
+		return true;
 	}
 
 	/**
@@ -217,7 +217,7 @@ class EmailTemplate extends ActiveRecord {
 	 * @param null  $bcc
 	 *
 	 * @return bool
-	 * @throws \yii\base\InvalidConfigException
+	 * @throws InvalidConfigException
 	 */
 	public function send($to, array $params = [], $files = [], $bcc = null) {
 		$text            = ($this->renderAttribute('text', $params));

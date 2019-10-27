@@ -6,13 +6,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist navatech/yii2-email-manager "1.0.*"
+php composer.phar require --prefer-dist navatech/yii2-email-manager "@dev"
 ```
 
 or add
 
 ```
-"navatech/yii2-email-manager": "1.0.*"
+"navatech/yii2-email-manager": "@dev"
 ```
 
 to the require section of your `composer.json` file.
@@ -112,11 +112,11 @@ Add command to the list of the available commands. Put it into console app confi
 ```
 Add email sending daemon into crontab, can be via lockrun or run-one utils:
 ```
-    */5 * * * * php /your/site/path/yii email/run-spool-daemon
+    */5 * * * * php /your/site/path/yii email/spool-daemon
 ```
 OR, if you will use cboden/ratchet
 ```
-    */5 * * * * php /your/site/path/yii email/run-loop-daemon
+    */5 * * * * php /your/site/path/yii email/loop-daemon
 ```
 # Usage
 ##Backend

@@ -41,7 +41,7 @@
 		"yiisoft/yii2" : "~2.0.4",
 		"react/event-loop" : "~0.4",
 		"mailgun/mailgun-php" : "^2.0",
-		"yiisoft/yii2-twig" : "~2.0.3",
+		"yiisoft/yii2-swiftmailer" : "~2.0.0 | ~2.1.0",
 		"php-http/guzzle6-adapter" : "~1.0",
 		"baibaratsky/yii2-serialized-attributes-behavior" : "~1.1",
 		"navatech/yii2-navatech-base" : "^1.0",

@@ -10,6 +10,7 @@ use navatech\email\interfaces\TransportInterface;
 use navatech\email\models\EmailMessage;
 use navatech\email\Module;
 use navatech\language\models\Language;
+use Yii;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
@@ -45,7 +46,7 @@ class EmailManager extends Component implements TransportInterface {
 	 * @throws InvalidConfigException
 	 */
 	public static function getInstance() {
-		$instance = \Yii::$app->get('emailManager');
+		$instance = Yii::$app->get('emailManager');
 		if (!$instance instanceof static) {
 			throw new InvalidConfigException('Missing email component.');
 		}
@@ -61,7 +62,7 @@ class EmailManager extends Component implements TransportInterface {
 			$this->defaultLanguage = reset($this->languages);
 		}
 		foreach ($this->transports as $name => $config) {
-			$this->transports[$name] = \Yii::createObject($config);
+			$this->transports[$name] = Yii::createObject($config);
 		}
 		if (empty($this->defaultTransport)) {
 			reset($this->transports);
