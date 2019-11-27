@@ -129,7 +129,6 @@ class EmailController extends Controller implements EmailSpoolDaemonInterface {
 	 * @throws InvalidConfigException
 	 */
 	private function reSend() {
-		echo 'resend';
 		/**@var EmailManager $instance */
 		$instance    = Yii::$app->get('emailManager');
 		$db          = Yii::$app->db;
@@ -163,7 +162,6 @@ class EmailController extends Controller implements EmailSpoolDaemonInterface {
 	 * @throws Exception
 	 */
 	private function sendOne() {
-		echo 'send one';
 		$db          = Yii::$app->db;
 		$transaction = $db->beginTransaction();
 		try {
@@ -213,7 +211,6 @@ class EmailController extends Controller implements EmailSpoolDaemonInterface {
 	 * @throws StaleObjectException
 	 */
 	private function clean() {
-		echo 'clean';
 		/**@var Module $module */
 		$module        = Yii::$app->getModule('mailer');
 		$emailMessages = EmailMessage::find()->andWhere([
