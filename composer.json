@@ -37,7 +37,6 @@
 	},
 	"minimum-stability" : "stable",
 	"require" : {
-		"php" : ">=5.6.0",
 		"yiisoft/yii2" : "~2.0.4",
 		"react/event-loop" : "~0.4",
 		"mailgun/mailgun-php" : "^3.4.0",
@@ -45,8 +44,8 @@
 		"yiisoft/yii2-twig": "^2.4.1",
 		"php-http/guzzle6-adapter" : "*",
 		"baibaratsky/yii2-serialized-attributes-behavior" : "~1.1",
-		"navatech/yii2-navatech-base" : "^1.0",
-		"navatech/yii2-roxymce" : "^2.0"
+		"navatech/yii2-navatech-base" : "@dev",
+		"navatech/yii2-roxymce" : "@dev"
 	},
 	"suggest" : {
 		"cboden/ratchet" : "to use loop instead of for-cycle in daemon",
