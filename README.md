@@ -110,13 +110,9 @@ Add command to the list of the available commands. Put it into console app confi
         'email' => '\phuong17889\email\commands\EmailController',
     ],
 ```
-Add email sending daemon into crontab, can be via lockrun or run-one utils:
+Add email sending daemon into crontab, can be via lockrun or run-one utils (read more `phuong17889/yii2-cron`):
 ```
-    */5 * * * * php /your/site/path/yii email/spool-daemon
-```
-OR, if you will use cboden/ratchet
-```
-    */5 * * * * php /your/site/path/yii email/loop-daemon
+    */5 * * * * php /your/site/path/yii email/start
 ```
 # Usage
 ##Backend
