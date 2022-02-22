@@ -1,5 +1,5 @@
 {
-	"name" : "navatech/yii2-email-manager",
+	"name" : "phuong17889/yii2-email-manager",
 	"description" : "Yii2 Email Manager",
 	"type" : "yii2-extension",
 	"license" : "MIT",
@@ -27,36 +27,35 @@
 		{
 			"name" : "Le Phuong",
 			"email" : "phuong17889@gmail.com",
-			"homepage" : "http://navatech.vn",
+			"homepage" : "http://phuong17889.vn",
 			"role" : "Developer"
 		}
 	],
-	"homepage" : "https://navatech.vn",
+	"homepage" : "https://lephuong.org",
 	"support" : {
-		"source" : "https://github.com/navatech/yii2-email-manager"
+		"source" : "https://github.com/phuong17889/yii2-email-manager"
 	},
 	"minimum-stability" : "stable",
 	"require" : {
 		"yiisoft/yii2" : "~2.0.4",
-		"react/event-loop" : "~0.4",
-		"mailgun/mailgun-php" : "^3.4.0",
+		"mailgun/mailgun-php" : "^2.0",
 		"yiisoft/yii2-swiftmailer" : "~2.0.0 | ~2.1.0",
-		"yiisoft/yii2-twig": "^2.4.1",
+		"yiisoft/yii2-twig": "2.2.*",
 		"php-http/guzzle6-adapter" : "*",
 		"baibaratsky/yii2-serialized-attributes-behavior" : "~1.1",
-		"navatech/yii2-navatech-base" : "@dev",
-		"navatech/yii2-roxymce" : "@dev"
+		"phuong17889/yii2-base" : "*",
+		"phuong17889/yii2-roxymce" : "*",
+		"phuong17889/yii2-cron": "*"
 	},
 	"suggest" : {
-		"cboden/ratchet" : "to use loop instead of for-cycle in daemon",
-		"navatech/yii2-setting": "1.0.*"
+		"phuong17889/yii2-setting": "*"
 	},
 	"autoload" : {
 		"psr-4" : {
-			"navatech\\email\\" : "src/"
+			"phuong17889\\email\\" : "src/"
 		}
 	},
 	"extra" : {
-		"bootstrap" : "navatech\\email\\Bootstrap"
+		"bootstrap" : "phuong17889\\email\\Bootstrap"
 	}
 }

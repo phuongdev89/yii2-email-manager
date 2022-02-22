@@ -4,18 +4,19 @@
  * @author Valentin Konusov <rlng-krsk@yandex.ru>
  */
 
-namespace navatech\email\interfaces;
-interface TransportInterface {
+namespace phuong17889\email\interfaces;
+interface TransportInterface
+{
 
-	/**
-	 * @param       $from
-	 * @param       $to
-	 * @param       $subject
-	 * @param       $text
-	 * @param array $files
-	 * @param null  $bcc
-	 *
-	 * @return mixed
-	 */
-	public function send($from, $to, $subject, $text, $files = [], $bcc = null);
+    /**
+     * @param       $from
+     * @param       $to
+     * @param       $subject
+     * @param       $text
+     * @param array $files
+     * @param null $bcc
+     *
+     * @return mixed
+     */
+    public function send($from, $to, $subject, $text, $files = [], $bcc = null);
 }

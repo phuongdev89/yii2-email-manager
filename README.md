@@ -6,13 +6,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist navatech/yii2-email-manager "@dev"
+php composer.phar require --prefer-dist phuong17889/yii2-email-manager "@dev"
 ```
 
 or add
 
 ```
-"navatech/yii2-email-manager": "@dev"
+"phuong17889/yii2-email-manager": "@dev"
 ```
 
 to the require section of your `composer.json` file.
@@ -22,7 +22,7 @@ to the require section of your `composer.json` file.
 Migration run
 
 ```php
-php yii migrate --migrationPath=@vendor/navatech/yii2-email-manager/src/migrations
+php yii migrate --migrationPath=@vendor/phuong17889/yii2-email-manager/src/migrations
 ```
 
 # Configuration #
@@ -40,17 +40,17 @@ php yii migrate --migrationPath=@vendor/navatech/yii2-email-manager/src/migratio
             'encryption'       => 'TLS',
         ],
         'emailManager' => [
-            'class' => '\navatech\email\EmailManager',
+            'class' => '\phuong17889\email\EmailManager',
             'defaultTransport' => 'yiiMailer',
             'resendAfter'      => 5,//resend after 5 mins if stuck
             'tryTime'          => 3,//max try time resend
             'transports' => [
                 'yiiMailer' => [
-                    'class' => '\navatech\email\transports\YiiMailer',
+                    'class' => '\phuong17889\email\transports\YiiMailer',
                 ],
                 /*
                 'mailGun' => [ //Not required
-                    'class'  => '\navatech\email\transports\MailGun',
+                    'class'  => '\phuong17889\email\transports\MailGun',
                     'apiKey' => 'xxx',
                     'domain' => 'our-domain.net',
                 ],
@@ -60,13 +60,13 @@ php yii migrate --migrationPath=@vendor/navatech/yii2-email-manager/src/migratio
     ],
     'modules' => [
         'mailer'   => [
-            'class'         => 'navatech\email\Module',
+            'class'         => 'phuong17889\email\Module',
             'cleanAfter'    => 30//clean after days
         ],
     ]
 ```
 ## Advanced config
-First you need `navatech/yii2-setting` installed, create 5 records on Setting module:
+First you need `phuong17889/yii2-setting` installed, create 5 records on Setting module:
 * `smtp_host` (value: `smtp.gmail.com`)
 * `smtp_user` (value: `test@gmail.com`)
 * `smtp_password` (value: `12345678`)
@@ -76,20 +76,20 @@ First you need `navatech/yii2-setting` installed, create 5 records on Setting mo
 ```
     'components' => [
         'mailer'        => [
-            'class'            => '\navatech\email\swiftmailer\Mailer',
+            'class'            => '\phuong17889\email\swiftmailer\Mailer',
         ],
         'emailManager'  => [
-            'class'            => '\navatech\email\components\EmailManager',
+            'class'            => '\phuong17889\email\components\EmailManager',
             'defaultTransport' => 'yiiMailer',
             'resendAfter'      => 5,//resend after 5 mins if stuck
             'tryTime'          => 3,//max try time resend
             'transports'       => [
                 'yiiMailer' => [
-                    'class' => '\navatech\email\transports\YiiMailer',
+                    'class' => '\phuong17889\email\transports\YiiMailer',
                 ],
                 /*
                 'mailGun' => [
-                    'class'  => '\navatech\email\transports\MailGun',
+                    'class'  => '\phuong17889\email\transports\MailGun',
                     'apiKey' => 'xxx',
                     'domain' => 'our-domain.net',
                 ],
@@ -99,7 +99,7 @@ First you need `navatech/yii2-setting` installed, create 5 records on Setting mo
     ]
     'modules' => [
         'mailer'   => [
-            'class'         => 'navatech\email\Module',
+            'class'         => 'phuong17889\email\Module',
             'cleanAfter'    => 30//clean after days
       ],
     ]
@@ -107,7 +107,7 @@ First you need `navatech/yii2-setting` installed, create 5 records on Setting mo
 Add command to the list of the available commands. Put it into console app configuration:
 ```
     'controllerMap' => [
-        'email' => '\navatech\email\commands\EmailController',
+        'email' => '\phuong17889\email\commands\EmailController',
     ],
 ```
 Add email sending daemon into crontab, can be via lockrun or run-one utils:

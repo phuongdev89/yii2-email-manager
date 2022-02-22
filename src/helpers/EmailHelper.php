@@ -8,15 +8,17 @@
  * @time    9:10 AM
  */
 
-namespace navatech\email\helpers;
-class EmailHelper {
+namespace phuong17889\email\helpers;
+class EmailHelper
+{
 
-	/**
-	 * @param $email
-	 *
-	 * @return string
-	 */
-	public static function protectOff($email) {
-		return '<!--email_off-->' . $email . '<!--/email_off-->';
-	}
+    /**
+     * @param $email
+     *
+     * @return string
+     */
+    public static function protectOff($email)
+    {
+        return '<!--email_off-->' . $email . '<!--/email_off-->';
+    }
 }
