@@ -113,7 +113,11 @@ class EmailController extends DaemonController
             (time() - ($module->cleanAfter * 3600 * 24)),
         ])->all();
         foreach ($emailMessages as $emailMessage) {
-            $emailMessage->delete();
+            if ($module->cleanOnlyBody) {
+                $emailMessage->updateAttributes(['text'=>'cleared']);
+            } else {
+                $emailMessage->delete();
+            }
         }
     }
 
