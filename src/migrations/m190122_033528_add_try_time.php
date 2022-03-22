@@ -13,7 +13,10 @@ class m190122_033528_add_try_time extends Migration
      */
     public function safeUp()
     {
-        $this->addColumn('{{%email_message}}', 'try_time', \yii\db\Schema::TYPE_INTEGER . ' DEFAULT 0');
+	    try {
+		    $this->addColumn('{{%email_message}}', 'try_time', \yii\db\Schema::TYPE_INTEGER . ' DEFAULT 0');
+	    } catch (Exception|Error $e) {
+	    }
     }
 
     /**
