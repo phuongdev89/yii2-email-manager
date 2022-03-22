@@ -40,7 +40,6 @@ class EmailMessage extends ActiveRecord
 
     const STATUS_SENT = 'sent';
 
-
     const STATUS = [
         self::STATUS_ERROR => 'Error',
         self::STATUS_NEW => 'New',
@@ -90,7 +89,6 @@ class EmailMessage extends ActiveRecord
         return [
             [
                 [
-                    'status',
                     'priority',
                     'try_time',
                     'email_template_id',
@@ -98,7 +96,10 @@ class EmailMessage extends ActiveRecord
                 'integer',
             ],
             [
-                ['text'],
+                [
+	                'status',
+	                'text'
+                ],
                 'string',
             ],
             [
