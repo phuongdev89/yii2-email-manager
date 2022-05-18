@@ -6,6 +6,7 @@
 
 namespace phuong17889\email\twig;
 
+use Exception;
 use phuong17889\email\components\EmailManager;
 use phuong17889\email\models\EmailTemplate;
 use Twig\Error\LoaderError;
@@ -25,8 +26,9 @@ class EmailTemplateLoader extends Component implements LoaderInterface
     /**
      * @param $name
      *
-     * @return mixed|string|Source
+     * @return Source
      * @throws InvalidConfigException
+     * @throws Exception
      */
     public function getSource($name)
     {
@@ -51,7 +53,7 @@ class EmailTemplateLoader extends Component implements LoaderInterface
     /**
      * {@inheritDoc}
      */
-    public function getCacheKey($name)
+    public function getCacheKey(string $name): string
     {
         return $name . $this->attributeName;
     }
@@ -59,7 +61,7 @@ class EmailTemplateLoader extends Component implements LoaderInterface
     /**
      * {@inheritDoc}
      */
-    public function isFresh($name, $time)
+    public function isFresh(string $name, int $time): bool
     {
         return false;
     }
@@ -73,7 +75,7 @@ class EmailTemplateLoader extends Component implements LoaderInterface
      *
      * @throws InvalidConfigException
      */
-    public function getSourceContext($name)
+    public function getSourceContext(string $name) : Source
     {
         return $this->getSource($name);
     }
@@ -86,7 +88,7 @@ class EmailTemplateLoader extends Component implements LoaderInterface
      * @return bool If the template source code is handled by this loader or not
      * @throws InvalidConfigException
      */
-    public function exists($name)
+    public function exists(string $name)
     {
         try {
             $this->getSource($name);

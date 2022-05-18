@@ -9,6 +9,7 @@ use phuong17889\email\Module;
 use phuong17889\email\twig\EmailTemplateLoader;
 use phuong17889\language\models\Language;
 use Twig\Environment;
+use Twig\Loader\LoaderInterface;
 use Twig_LoaderInterface;
 use Yii;
 use yii\base\InvalidConfigException;
@@ -188,11 +189,11 @@ class EmailTemplate extends ActiveRecord
     /**
      * Twig instance factory
      *
-     * @param Twig_LoaderInterface $loader
+     * @param LoaderInterface $loader
      *
      * @return Environment
      */
-    protected function getTwig(Twig_LoaderInterface $loader)
+    protected function getTwig(LoaderInterface $loader)
     {
         $twig = new Environment($loader);
         $twig->setCache(false);
