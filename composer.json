@@ -40,7 +40,7 @@
 		"yiisoft/yii2" : "~2.0.4",
 		"mailgun/mailgun-php" : "^2.0",
 		"yiisoft/yii2-swiftmailer" : "~2.0.0 | ~2.1.0",
-		"yiisoft/yii2-twig": "2.2.*",
+		"yiisoft/yii2-twig": "^2.2",
 		"php-http/guzzle6-adapter" : "*",
 		"baibaratsky/yii2-serialized-attributes-behavior" : "~1.1",
 		"phuong17889/yii2-base" : "*",
