@@ -27,11 +27,9 @@
 		{
 			"name" : "Phuong Dev",
 			"email" : "phuongdev89@gmail.com",
-			"homepage" : "http://lephuong.org",
 			"role" : "Developer"
 		}
 	],
-	"homepage" : "https://lephuong.org",
 	"support" : {
 		"source" : "https://github.com/phuongdev89/yii2-email-manager"
 	},
