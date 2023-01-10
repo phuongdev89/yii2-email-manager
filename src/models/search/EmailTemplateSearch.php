@@ -1,8 +1,8 @@
 <?php
 
-namespace phuong17889\email\models\search;
+namespace phuongdev89\email\models\search;
 
-use phuong17889\email\models\EmailTemplate;
+use phuongdev89\email\models\EmailTemplate;
 use yii\data\ActiveDataProvider;
 
 class EmailTemplateSearch extends EmailTemplate

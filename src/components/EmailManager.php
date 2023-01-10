@@ -4,12 +4,12 @@
  * @author Valentin Konusov <rlng-krsk@yandex.ru>
  */
 
-namespace phuong17889\email\components;
+namespace phuongdev89\email\components;
 
-use phuong17889\email\interfaces\TransportInterface;
-use phuong17889\email\models\EmailMessage;
-use phuong17889\email\Module;
-use phuong17889\language\models\Language;
+use phuongdev89\email\interfaces\TransportInterface;
+use phuongdev89\email\models\EmailMessage;
+use phuongdev89\email\Module;
+use phuongdev89\language\models\Language;
 use Yii;
 use yii\base\Component;
 use yii\base\InvalidConfigException;

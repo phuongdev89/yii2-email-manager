@@ -1,13 +1,13 @@
 <?php
 
-namespace phuong17889\email\models;
+namespace phuongdev89\email\models;
 
 use BadMethodCallException;
 use Exception;
-use phuong17889\email\components\EmailManager;
-use phuong17889\email\Module;
-use phuong17889\email\twig\EmailTemplateLoader;
-use phuong17889\language\models\Language;
+use phuongdev89\email\components\EmailManager;
+use phuongdev89\email\Module;
+use phuongdev89\email\twig\EmailTemplateLoader;
+use phuongdev89\language\models\Language;
 use Twig\Environment;
 use Twig\Loader\LoaderInterface;
 use Twig_LoaderInterface;

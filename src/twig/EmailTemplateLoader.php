@@ -4,11 +4,11 @@
  * @author Valentin Konusov <rlng-krsk@yandex.ru>
  */
 
-namespace phuong17889\email\twig;
+namespace phuongdev89\email\twig;
 
 use Exception;
-use phuong17889\email\components\EmailManager;
-use phuong17889\email\models\EmailTemplate;
+use phuongdev89\email\components\EmailManager;
+use phuongdev89\email\models\EmailTemplate;
 use Twig\Error\LoaderError;
 use Twig\Loader\LoaderInterface;
 use Twig\Source;

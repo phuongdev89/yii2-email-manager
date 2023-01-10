@@ -1,9 +1,9 @@
 <?php
 
-namespace phuong17889\email\models\search;
+namespace phuongdev89\email\models\search;
 
 use kartik\daterange\DateRangeBehavior;
-use phuong17889\email\models\EmailMessage;
+use phuongdev89\email\models\EmailMessage;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 

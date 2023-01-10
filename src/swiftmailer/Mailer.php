@@ -1,6 +1,6 @@
 <?php
 /**
- * Created by Navatech.
+ * Created by phuongdev89.
  * @project yii2-cms
  * @author  Thuc
  * @email   thuchm92[at]gmail.com
@@ -8,9 +8,9 @@
  * @time    4:33 PM
  */
 
-namespace phuong17889\email\swiftmailer;
+namespace phuongdev89\email\swiftmailer;
 
-use phuong17889\email\Module;
+use phuongdev89\email\Module;
 use Yii;
 use yii\base\InvalidConfigException;
 

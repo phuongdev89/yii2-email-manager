@@ -1,12 +1,12 @@
 <?php
 
-namespace phuong17889\email\commands;
+namespace phuongdev89\email\commands;
 
 use Exception;
-use phuong17889\cron\commands\DaemonController;
-use phuong17889\email\components\EmailManager;
-use phuong17889\email\models\EmailMessage;
-use phuong17889\email\Module;
+use phuongdev89\cron\commands\DaemonController;
+use phuongdev89\email\components\EmailManager;
+use phuongdev89\email\models\EmailMessage;
+use phuongdev89\email\Module;
 use Throwable;
 use Yii;
 use yii\base\InvalidConfigException;

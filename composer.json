@@ -1,5 +1,5 @@
 {
-	"name" : "phuong17889/yii2-email-manager",
+	"name" : "phuongdev89/yii2-email-manager",
 	"description" : "Yii2 Email Manager",
 	"type" : "yii2-extension",
 	"license" : "MIT",
@@ -25,37 +25,38 @@
 			"role" : "Developer"
 		},
 		{
-			"name" : "Le Phuong",
-			"email" : "phuong17889@gmail.com",
+			"name" : "Phuong Dev",
+			"email" : "phuongdev89@gmail.com",
 			"homepage" : "http://lephuong.org",
 			"role" : "Developer"
 		}
 	],
 	"homepage" : "https://lephuong.org",
 	"support" : {
-		"source" : "https://github.com/phuong17889/yii2-email-manager"
+		"source" : "https://github.com/phuongdev89/yii2-email-manager"
 	},
 	"minimum-stability" : "stable",
 	"require" : {
+		"php": ">=7.1",
 		"yiisoft/yii2" : "~2.0.4",
 		"mailgun/mailgun-php" : "^2.0",
 		"yiisoft/yii2-swiftmailer" : "~2.0.0 | ~2.1.0",
 		"yiisoft/yii2-twig": "^2.2",
 		"php-http/guzzle6-adapter" : "*",
 		"baibaratsky/yii2-serialized-attributes-behavior" : "~1.1",
-		"phuong17889/yii2-base" : "*",
-		"phuong17889/yii2-roxymce" : "*",
-		"phuong17889/yii2-cron": "*"
+		"phuongdev89/yii2-base" : "*",
+		"phuongdev89/yii2-roxymce" : "*",
+		"phuongdev89/yii2-cron": "*"
 	},
 	"suggest" : {
-		"phuong17889/yii2-setting": "*"
+		"phuongdev89/yii2-setting": "*"
 	},
 	"autoload" : {
 		"psr-4" : {
-			"phuong17889\\email\\" : "src/"
+			"phuongdev89\\email\\" : "src/"
 		}
 	},
 	"extra" : {
-		"bootstrap" : "phuong17889\\email\\Bootstrap"
+		"bootstrap" : "phuongdev89\\email\\Bootstrap"
 	}
 }

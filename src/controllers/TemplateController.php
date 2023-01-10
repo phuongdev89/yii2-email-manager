@@ -1,8 +1,8 @@
 <?php
 
-namespace phuong17889\email\controllers;
+namespace phuongdev89\email\controllers;
 
-use phuong17889\email\models\EmailTemplate;
+use phuongdev89\email\models\EmailTemplate;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;

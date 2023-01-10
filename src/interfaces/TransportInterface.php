@@ -4,7 +4,7 @@
  * @author Valentin Konusov <rlng-krsk@yandex.ru>
  */
 
-namespace phuong17889\email\interfaces;
+namespace phuongdev89\email\interfaces;
 interface TransportInterface
 {
 

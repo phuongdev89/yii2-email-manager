@@ -2,8 +2,8 @@
 
 use kartik\grid\DataColumn;
 use kartik\grid\GridView;
-use phuong17889\email\helpers\EmailHelper;
-use phuong17889\email\models\EmailMessage;
+use phuongdev89\email\helpers\EmailHelper;
+use phuongdev89\email\models\EmailMessage;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
@@ -11,7 +11,7 @@ use yii\widgets\Pjax;
 /**
  * @var yii\web\View $this
  * @var yii\data\ActiveDataProvider $dataProvider
- * @var phuong17889\email\models\search\EmailMessageSearch $searchModel
+ * @var phuongdev89\email\models\search\EmailMessageSearch $searchModel
  */
 $this->title = Yii::t('email', 'Email History');
 $this->params['breadcrumbs'][] = $this->title;

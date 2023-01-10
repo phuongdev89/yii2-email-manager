@@ -4,6 +4,6 @@ Upgraded `twig/twig` to ^3.0
 Required php ^7.2.5    
 Fix EmailTemplateLoader
 # 2.0.0
-Moved from navatech
+Moved from phuongdev89
 
 Required php ^7.0

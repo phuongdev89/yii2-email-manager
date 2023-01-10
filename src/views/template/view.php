@@ -5,7 +5,7 @@ use yii\widgets\DetailView;
 
 /**
  * @var yii\web\View $this
- * @var phuong17889\email\models\EmailTemplate $model
+ * @var phuongdev89\email\models\EmailTemplate $model
  */
 $this->title = $model->subject;
 $this->params['breadcrumbs'][] = [

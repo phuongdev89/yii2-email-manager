@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 /**
  * @var yii\web\View $this
- * @var phuong17889\email\models\EmailTemplate $model
+ * @var phuongdev89\email\models\EmailTemplate $model
  */
 $this->title = Yii::t('email', 'Update Email Template') . ': ' . ' ' . $model->id;
 $this->params['breadcrumbs'][] = [
@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = [
 ];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
-<div class="phuong17889-email">
+<div class="phuongdev89-email">
     <div class="row">
         <div class="col-sm-12">
 

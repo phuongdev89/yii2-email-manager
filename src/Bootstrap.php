@@ -1,19 +1,20 @@
 <?php
 /**
- * Created by Navatech.
+ * Created by phuongdev89.
  * @project yii2-setting
  * @author  Phuong
- * @email   phuong17889[at]gmail.com
+ * @email   phuongdev89@gmail.com
  * @date    05/07/2016
  * @time    11:50 PM
  * @version 2.0.0
  */
 
-namespace phuong17889\email;
+namespace phuongdev89\email;
 
 use Yii;
 use yii\base\Application;
 use yii\base\BootstrapInterface;
+use yii\base\InvalidConfigException;
 use yii\i18n\PhpMessageSource;
 
 class Bootstrap implements BootstrapInterface
@@ -24,7 +25,7 @@ class Bootstrap implements BootstrapInterface
      *
      * @param Application $app the application currently running
      *
-     * @throws \yii\base\InvalidConfigException
+     * @throws InvalidConfigException
      */
     public function bootstrap($app)
     {
@@ -36,5 +37,6 @@ class Bootstrap implements BootstrapInterface
             ];
         }
         Yii::setAlias('email', __DIR__);
+        Yii::setAlias('phuongdev89/email', __DIR__);
     }
 }

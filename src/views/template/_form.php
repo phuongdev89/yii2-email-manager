@@ -1,8 +1,8 @@
 <?php
 
-use phuong17889\email\components\EmailManager;
-use phuong17889\email\models\EmailTemplate;
-use phuong17889\roxymce\widgets\RoxyMceWidget;
+use phuongdev89\email\components\EmailManager;
+use phuongdev89\email\models\EmailTemplate;
+use phuongdev89\roxymce\widgets\RoxyMceWidget;
 use yii\helpers\Html;
 use yii\web\View;
 use yii\widgets\ActiveForm;

@@ -1,6 +1,6 @@
 <?php
 /**
- * Created by Navatech.
+ * Created by phuongdev89.
  * @project visionlink-io
  * @author  Phuong
  * @email   notteen[at]gmail.com
@@ -8,7 +8,7 @@
  * @time    9:10 AM
  */
 
-namespace phuong17889\email\helpers;
+namespace phuongdev89\email\helpers;
 class EmailHelper
 {
 

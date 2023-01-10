@@ -4,11 +4,11 @@
  * @author Valentin Konusov <rlng-krsk@yandex.ru>
  */
 
-namespace phuong17889\email\transports;
+namespace phuongdev89\email\transports;
 
 use Exception;
 use Http\Adapter\Guzzle6\Client;
-use phuong17889\email\interfaces\TransportInterface;
+use phuongdev89\email\interfaces\TransportInterface;
 use Yii;
 use yii\base\Component;
 

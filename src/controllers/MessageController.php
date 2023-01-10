@@ -1,9 +1,9 @@
 <?php
 
-namespace phuong17889\email\controllers;
+namespace phuongdev89\email\controllers;
 
-use phuong17889\email\models\EmailMessage;
-use phuong17889\email\models\search\EmailMessageSearch;
+use phuongdev89\email\models\EmailMessage;
+use phuongdev89\email\models\search\EmailMessageSearch;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
