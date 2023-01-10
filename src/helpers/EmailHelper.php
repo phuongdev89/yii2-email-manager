@@ -1,9 +1,8 @@
 <?php
 /**
  * Created by phuongdev89.
- * @project visionlink-io
  * @author  Phuong
- * @email   notteen[at]gmail.com
+ * @email   phuongdev@gmail.com
  * @date    9/13/2018
  * @time    9:10 AM
  */
