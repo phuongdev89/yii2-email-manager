@@ -37,10 +37,10 @@
 	"require" : {
 		"php": ">=7.1",
 		"yiisoft/yii2" : "~2.0.4",
-		"mailgun/mailgun-php" : "^2.0",
+		"mailgun/mailgun-php" : "*",
 		"yiisoft/yii2-swiftmailer" : "~2.0.0 | ~2.1.0",
 		"yiisoft/yii2-twig": "^2.2",
-		"php-http/guzzle6-adapter" : "*",
+		"guzzlehttp/guzzle" : "*",
 		"baibaratsky/yii2-serialized-attributes-behavior" : "~1.1",
 		"phuongdev89/yii2-base" : "*",
 		"phuongdev89/yii2-roxymce" : "*",
